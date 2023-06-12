@@ -19,15 +19,12 @@ namespace HomeWork
         {
             string text = myText.Text;
             SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "JSON Dosyaları|*.json|Tüm Dosyalar|*.*";
+            saveDialog.Filter = "JSON Files|*.json|All Files|*.*";
             bool? result = saveDialog.ShowDialog();
 
-            // Kullanıcı Kaydet'e tıkladıysa devam et
             if (result == true)
             {
-                // Dosya yolu
                 string filePath = saveDialog.FileName;
-
                 string json = JsonConvert.SerializeObject(text, Formatting.Indented);
                 File.WriteAllText(filePath, json);
             }
@@ -42,14 +39,8 @@ namespace HomeWork
             if (result == true)
             {
                 string filePath = openFileDialog.FileName;
-
-                // JSON dosyasını oku
                 string json = File.ReadAllText(filePath);
-
-                // JSON'dan veriyi çıkar
                 string text = JsonConvert.DeserializeObject<string>(json);
-
-                // Çıkarılan veriyi TextBox'a yerleştir
                 myText.Text = text;
                 PathName.Text =filePath;
             }
